@@ -113,6 +113,53 @@ class WebsocketManager: WebSocketDelegate {
                     }
                 }
                 
+                if let message = try? decoder.decode(UnauthorizedMessage.self, from: jsonData){
+                    if(message.type == "disconnect" && message.reason == "unauthorized"){
+                        print("getting new token refresh")
+                     
+                        var url: URL {
+                            var components = URLComponents(string: "\(Bundle.main.object(forInfoDictionaryKey: "BASE_URL") ?? "")/oauth/token")! //handle all the error cases
+                            let queryItems: [URLQueryItem] = [
+                                .init(name: "client_id", value: Bundle.main.object(forInfoDictionaryKey: "CLIENT_ID") as? String ?? "" ),
+                                .init(name: "client_secret", value: Bundle.main.object(forInfoDictionaryKey: "CLIENT_SECRET") as? String ?? ""),
+                                .init(name: "grant_type", value: "refresh_token"),
+                                .init(name: "refresh_token", value: "\(KeychainSwift().get("refreshToken") ?? "")")
+                            ]
+                            components.queryItems = queryItems
+                            return components.url!
+                        }
+                        print(url)
+                        var request = URLRequest(url: url)
+                        request.httpMethod = "POST"
+                        
+                        let task = URLSession.shared.dataTask(with: request) { [weak self ] data, response, error in
+                            guard let self = self else { return }
+                            
+                            let decoder = JSONDecoder()
+                            decoder.keyDecodingStrategy = .convertFromSnakeCase
+                            guard let data = data else { return }
+                            print("pre acess token \(KeychainSwift().get("accessToken") ?? "")")
+                            if let user:User = try? decoder.decode(User.self, from: data) {
+                                
+                                if let accessToken = user.accessToken, let createdAt = user.createdAt, let expiresIn = user.expiresIn, let refreshToken = user.refreshToken {
+                                    KeychainSwift().set(accessToken, forKey: "accessToken")
+                                    KeychainSwift().set("\(createdAt)", forKey: "createdAt")
+                                    KeychainSwift().set("\(expiresIn)", forKey: "expiresIn")
+                                    KeychainSwift().set(refreshToken, forKey: "refreshToken")
+                                    
+                                    print("post acess token\(accessToken)")
+                                    var req = URLRequest(url: URL(string: "\(Bundle.main.object(forInfoDictionaryKey: "WEB_SOCKET_URL") ?? "")?access_token=" + accessToken)!)
+                                    req.timeoutInterval = 5
+                                    socket = WebSocket(request: req)
+                                    socket?.connect()
+                                    socket?.delegate = self
+                                }
+                            }
+                        }
+                        task.resume()
+                    }
+                }
+                
                 if let message = try? decoder.decode(NewChatsMessage.self, from: jsonData){
                     
                         chats  = message.message.chats

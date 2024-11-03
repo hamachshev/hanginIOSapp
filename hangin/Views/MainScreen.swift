@@ -48,7 +48,9 @@ struct MainScreen: View {
             }
                     
                 
-            }
+        }.onAppear{
+            webSocketManager.startConnection()
+        }
             .navigationTitle("Chats")
             
             .navigationDestination(isPresented: $chatScreenPresented, destination:{

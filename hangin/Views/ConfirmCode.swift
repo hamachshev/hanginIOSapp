@@ -11,7 +11,7 @@ import KeychainSwift
 struct ConfirmCode: View {
     @Binding var text: String
     @State private var confirmCode = ""
-    @State private var showChatsScreen: Bool = false
+    @State private var showChatsScreen: Bool = (KeychainSwift().get("accessToken") != nil) ? true : false
 
     
     
@@ -53,7 +53,7 @@ struct ConfirmCode: View {
 //                            }
                             showChatsScreen = true
                             print(accessToken)
-                            WebsocketManager.shared.startConnection()
+                            
                         }
                     }
                     
