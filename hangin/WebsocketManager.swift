@@ -14,6 +14,7 @@ class WebsocketManager: WebSocketDelegate {
     static let shared = WebsocketManager()
     var chats: [Int] = []
     var chatMessages: [ChatMessageMessage] = []
+    private var started = false
     
     var currentChat: Int? {
         willSet{
@@ -36,11 +37,14 @@ class WebsocketManager: WebSocketDelegate {
     }
     
     func startConnection(){
+        if started {return}
+        
         var req = URLRequest(url: URL(string: "\(Bundle.main.object(forInfoDictionaryKey: "WEB_SOCKET_URL") ?? "")?access_token=" + (KeychainSwift().get("accessToken") ?? ""))!)
         req.timeoutInterval = 5
         socket = WebSocket(request: req)
         socket?.connect()
         socket?.delegate = self
+        started = true
     }
     func newChat() {
         print("making new chat")
@@ -170,13 +174,14 @@ class WebsocketManager: WebSocketDelegate {
                 if let message = try? decoder.decode(OwnChatMessage.self, from: jsonData){
                     
                         currentChat = message.message.ownChat
+                        chats.append(message.message.ownChat)
                         print("got own chat")
       
                 }
                 if let message = try? decoder.decode(NewChatMessage.self, from: jsonData){
                     
-                    chats.append(message.message.chat.id)
-                        print("got own chat")
+                        chats.append(message.message.chat.id)
+                        print("got new chat")
       
                 }
                 
