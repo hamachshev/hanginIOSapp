@@ -7,3 +7,10 @@
 
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
+
+SLASH=/  //https://arc.net/l/quote/occtecgf
+URL=possum-intent-ghastly.ngrok-free.app
+BASE_URL=https:$(SLASH)/$(URL)
+CLIENT_ID=qCD2AlC5e9r4A2qnwZ6JLhBzoGjh3PT3_0sNPHvU4bg
+CLIENT_SECRET=rPQa4a33w1GiJZyBKL3x2dUIVIw1nmOhS5_HvFf4_LU
+WEB_SOCKET_URL=wss:$(SLASH)/$(URL)/cable //wss://possum-intent-ghastly.ngrok-free.app/cable

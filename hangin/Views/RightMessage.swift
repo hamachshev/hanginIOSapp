@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct RightMessage: View {
+    var text:String
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Spacer()
+            Text(text)
+                .foregroundColor(.white)
+                .font(.caption)
+                .padding(10)
+                .padding(.horizontal, 10)
+                .background(RoundedRectangle(cornerRadius: 25)
+                    .fill(Color("ownMessage")))
+        }
+        .padding(.bottom, 5)
     }
-}
-
-#Preview {
-    RightMessage()
 }

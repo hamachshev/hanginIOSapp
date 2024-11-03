@@ -8,11 +8,20 @@
 import SwiftUI
 
 struct LeftMessage: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    var text:String
+    
+    var body: some View{
+        HStack{
+            Text(text)
+                .foregroundColor(.white)
+                .font(.caption)
+                .padding(10)
+                .padding(.horizontal, 10)
+                .background(RoundedRectangle(cornerRadius: 25)
+                    .fill(Color("secondary")))
+            Spacer()
+    }
+    .padding(.bottom, 5)
     }
 }
 
-#Preview {
-    LeftMessage()
-}

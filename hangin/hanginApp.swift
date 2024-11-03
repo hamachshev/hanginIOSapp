@@ -11,7 +11,7 @@ import SwiftUI
 struct hanginApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnboardingView()
         }
     }
 }

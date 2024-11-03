@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct OwnChatMessage: Codable {
+    var message: OwnChat
+}
+
+
+struct OwnChat: Codable {
+    var ownChat:Int
+}

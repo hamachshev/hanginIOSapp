@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct DeleteChatMessage: Codable {
+    var deletChat: Int
+}

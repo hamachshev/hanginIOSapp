@@ -22,7 +22,7 @@ struct OnboardingView: View {
                 TextField("Enter your number", text: $text)
                 Button {
                     var url: URL {
-                        var components = URLComponents(string: "http:/192.168.1.91:3000/create")!
+                        var components = URLComponents(string: "\(Bundle.main.object(forInfoDictionaryKey: "BASE_URL") ?? "")/create")! // this needs to be handled in an error case
                         let queryItems: [URLQueryItem] = [
                             .init(name: "number", value: text)
                         ]

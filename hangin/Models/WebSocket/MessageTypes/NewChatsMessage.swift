@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct NewChatsMessage: Codable {
+    var message: Chats
+}
+
+struct Chats: Codable {
+    var chats: [Int]
+}

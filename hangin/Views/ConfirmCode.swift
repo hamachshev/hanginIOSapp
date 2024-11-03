@@ -20,10 +20,10 @@ struct ConfirmCode: View {
             TextField("Enter code", text: $confirmCode)
             Button {
                 var url: URL {
-                    var components = URLComponents(string: "http:/192.168.1.91:3000/oauth/token")!
+                    var components = URLComponents(string: "\(Bundle.main.object(forInfoDictionaryKey: "BASE_URL") ?? "")/oauth/token")! //handle all the error cases
                     let queryItems: [URLQueryItem] = [
-                        .init(name: "client_id", value: "qCD2AlC5e9r4A2qnwZ6JLhBzoGjh3PT3_0sNPHvU4bg"),
-                        .init(name: "client_secret", value: "rPQa4a33w1GiJZyBKL3x2dUIVIw1nmOhS5_HvFf4_LU"),
+                        .init(name: "client_id", value: Bundle.main.object(forInfoDictionaryKey: "CLIENT_ID") as? String ?? "" ),
+                        .init(name: "client_secret", value: Bundle.main.object(forInfoDictionaryKey: "CLIENT_SECRET") as? String ?? ""),
                         .init(name: "grant_type", value: "password"),
                         .init(name: "number", value: text),
                         .init(name: "code", value: confirmCode)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WebSocketPing {
-    var type: String
+struct WebSocketMessage: Codable {
+    var type: String?
     var message: String?
 }
