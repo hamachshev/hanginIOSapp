@@ -13,5 +13,7 @@ struct OwnChatMessage: Codable {
 
 
 struct OwnChat: Codable {
-    var ownChat:Int
+    var ownChat:Chat
 }
+
+

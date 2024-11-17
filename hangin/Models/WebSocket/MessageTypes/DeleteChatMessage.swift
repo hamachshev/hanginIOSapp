@@ -8,5 +8,9 @@
 import Foundation
 
 struct DeleteChatMessage: Codable {
-    var deletChat: Int
+    var message: DeleteChatMessageMessage
+}
+
+struct DeleteChatMessageMessage: Codable {
+    var deleteChat: Int
 }

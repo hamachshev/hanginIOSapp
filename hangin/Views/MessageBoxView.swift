@@ -12,19 +12,26 @@ struct MessageBoxView: View {
     @State var messageText = ""
     @FocusState var intputMessageBoxFocus:Bool
     @State var webSocketManager = WebsocketManager.shared
+    @State var showParticipants:Bool = false
     
     var body: some View {
         VStack {
             
-            HStack{
-                Image("hangin-logo-big")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 120)
-                Spacer()
-                Circle()
-                    .fill(Color("secondary"))
-                    .frame(width: 35)
+            VStack {
+                HStack{
+                    Text(webSocketManager.currentChat?.name ?? "")
+                        .font(.title)
+                        .fontWeight(.heavy)
+                    Spacer()
+                    Circles2(users: webSocketManager.currentChat?.users ?? [])
+                        .onTapGesture {
+                            showParticipants.toggle()
+                        }
+                    
+                }
+                if showParticipants {
+                    ParticipantsView(users: webSocketManager.currentChat?.users ?? [])
+                }
             }
             Spacer()
             ScrollView {
@@ -50,7 +57,7 @@ struct MessageBoxView: View {
                     .foregroundColor(.white)
                     .font(.caption))
                 {}.focused($intputMessageBoxFocus)
-                    .padding(.leading, 20)
+                    .padding(.horizontal, 20)
                     .padding(.vertical, 10)
                     .frame(maxWidth: .infinity)
                     .background(Color("secondary"))
@@ -78,9 +85,10 @@ struct MessageBoxView: View {
             
         }
         
-        .padding(30)
+        .padding(15)
         .padding(.horizontal, 10)
         .background(Color("background").edgesIgnoringSafeArea(.all))
+//        .toolbar(.hidden)
         
     }
 }

@@ -12,9 +12,6 @@ struct NewChatMessage: Codable {
 }
 
 struct NewChatMessageMessage: Codable {
-    var chat: idStruct
+    var chat: Chat
 }
 
-struct idStruct: Codable {
-    var id: Int
-}

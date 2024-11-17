@@ -16,40 +16,65 @@ struct OnboardingView: View {
 
     var body: some View {
         NavigationStack {
-            VStack {
-                Text("welcome to hangin'")
-                
-                TextField("Enter your number", text: $text)
-                Button {
-                    var url: URL {
-                        var components = URLComponents(string: "\(Bundle.main.object(forInfoDictionaryKey: "BASE_URL") ?? "")/create")! // this needs to be handled in an error case
-                        let queryItems: [URLQueryItem] = [
-                            .init(name: "number", value: text)
-                        ]
-                        components.queryItems = queryItems
-                        return components.url!
-                    }
-                    var request = URLRequest(url: url)
-                    request.httpMethod = "POST"
-                    
-                    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            ZStack {
+                Color.background.ignoresSafeArea()
+               
+                VStack {
+                    Spacer()
+                    Image("hangin-logo-big")
+                        .padding(.bottom, 30)
+                    TextField("Enter your phone number", text: $text)
+                        .padding(.vertical, 10)
                         
-                        guard error == nil else {return}
-                        confirmCodeScreen = true
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(Color.white)
+                        .frame(width: 250)
+                        .background(Color("textFieldBackground"))
+                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                    Button {
+                        var url: URL {
+                            var components = URLComponents(string: "\(Bundle.main.object(forInfoDictionaryKey: "BASE_URL") ?? "")/create")! // this needs to be handled in an error case
+                            let queryItems: [URLQueryItem] = [
+                                .init(name: "number", value: text)
+                            ]
+                            components.queryItems = queryItems
+                            return components.url!
+                        }
+                        var request = URLRequest(url: url)
+                        request.httpMethod = "POST"
                         
+                        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                            
+                            guard error == nil else {return}
+                            confirmCodeScreen = true
+                            
+                        }
+                        task.resume()
+                        
+                    } label: {
+                        Text("lets go")
+                            .fontWeight(.bold)
+                            .foregroundStyle(Color("buttonText"))
                     }
-                    task.resume()
+                 
+                    .padding(10)
+                    .padding(.horizontal, 10)
+                    .background(.circleBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .padding(.top, 3)
                     
-                } label: {
-                    Text("lets go")
+                    Spacer()
                 }
+                .navigationDestination(isPresented: $confirmCodeScreen) {
+                    ConfirmCode(text: $text)
+                }
+                
             }
-            .navigationDestination(isPresented: $confirmCodeScreen) {
-                ConfirmCode(text: $text)
-            }
+           
             
             
-        }
+        } 
         
 
             

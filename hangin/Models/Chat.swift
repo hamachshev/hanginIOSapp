@@ -7,7 +7,16 @@
 
 import Foundation
 
-struct Chat {
-    var name: String?
-    var messages: [Message]?
+struct Chat : Codable, Hashable{
+    var id: Int
+    var name: String
+    var users: [ChatUser]
+}
+
+struct ChatUser: Codable, Hashable{
+    var uuid: String
+    var firstName: String
+    var lastName: String
+    var number: String
+    var profilePic: String?
 }

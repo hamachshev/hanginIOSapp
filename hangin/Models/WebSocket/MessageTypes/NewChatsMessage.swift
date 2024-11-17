@@ -12,5 +12,5 @@ struct NewChatsMessage: Codable {
 }
 
 struct Chats: Codable {
-    var chats: [Int]
+    var chats: [Chat]
 }

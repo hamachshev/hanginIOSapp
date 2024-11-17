@@ -12,11 +12,12 @@ import KeychainSwift
 @Observable
 class WebsocketManager: WebSocketDelegate {
     static let shared = WebsocketManager()
-    var chats: [Int] = []
+    var chats: [Chat] = []
     var chatMessages: [ChatMessageMessage] = []
+    var contactsOnline: [ChatUser] = []
     private var started = false
     
-    var currentChat: Int? {
+    var currentChat: Chat? {
         willSet{
             if let currentChat = currentChat {
                 unsubscribe(chat: currentChat)
@@ -46,35 +47,35 @@ class WebsocketManager: WebSocketDelegate {
         socket?.delegate = self
         started = true
     }
-    func newChat() {
+    func newChat(name:String) {
         print("making new chat")
         socket?.write(string: """
                       {
                         "command":"message",
                         "identifier":"{\\"channel\\":\\"ChatsChannel\\"}",
-                        "data":"{\\"action\\":\\"createChat\\"}"
+                        "data":"{\\"action\\":\\"createChat\\",\\"name\\":\\"\(name)\\"}"
                       }
                       """)
     }
     
-    func subToChat(chat:Int){
+    func subToChat(chat:Chat){
         print("subbing to chat")
         
         socket?.write(string:"""
                                     {
                                         "command":"subscribe",
-                                        "identifier":"{\\"channel\\":\\"ChatChannel\\", \\"id\\":\\"\(chat)\\"}"
+                                        "identifier":"{\\"channel\\":\\"ChatChannel\\", \\"id\\":\\"\(chat.id )\\"}"
                                       }
                 """)
     }
     
-    func unsubscribe(chat:Int){
+    func unsubscribe(chat:Chat){
         print("unsubbing to chat")
         
         socket?.write(string:"""
                                     {
                                         "command":"unsubscribe",
-                                        "identifier":"{\\"channel\\":\\"ChatChannel\\", \\"id\\":\\"\(chat)\\"}"
+                                        "identifier":"{\\"channel\\":\\"ChatChannel\\", \\"id\\":\\"\(chat.id)\\"}"
                                       }
                 """)
     }
@@ -82,10 +83,11 @@ class WebsocketManager: WebSocketDelegate {
     func sendMessage(message: String){
         print("sending message")
         
+        //handle error case
         socket?.write(string:"""
                                     {
                                         "command":"message",
-                                        "identifier":"{\\"channel\\":\\"ChatChannel\\", \\"id\\":\\"\(currentChat!)\\"}",
+                                        "identifier":"{\\"channel\\":\\"ChatChannel\\", \\"id\\":\\"\(currentChat!.id )\\"}",
                                         "data":"{\\"action\\":\\"speak\\",\\"body\\":\\"\(message)\\", \\"kind\\":\\"text\\", \\"status\\":\\"sent\\"}"
                                       }
                 """)
@@ -180,8 +182,40 @@ class WebsocketManager: WebSocketDelegate {
                 }
                 if let message = try? decoder.decode(NewChatMessage.self, from: jsonData){
                     
-                        chats.append(message.message.chat.id)
+                        chats.append(message.message.chat)
                         print("got new chat")
+      
+                }
+                
+                if let message = try? decoder.decode(DeleteChatMessage.self, from: jsonData){
+                    
+                    chats = chats.filter { chat in
+                        chat.id != message.message.deleteChat
+                    }
+                        print("deleting chat")
+      
+                }
+                
+                if let message = try? decoder.decode(ContactOnlineMessage.self, from: jsonData){
+                    
+                       contactsOnline.append(message.message.contactOnline)
+                        print("new online user!!")
+      
+                }
+                
+                if let message = try? decoder.decode(ContactsOnlineMessage.self, from: jsonData){
+                    
+                        contactsOnline.append(contentsOf: message.message.contactsOnline)
+                        print("new online users!!")
+      
+                }
+                
+                if let message = try? decoder.decode(ContactOfflineMessage.self, from: jsonData){
+                    
+                    contactsOnline = contactsOnline.filter { contact in
+                        contact.uuid != message.message.contactOffline
+                    }
+                        print("new online user!!")
       
                 }
                 
@@ -191,6 +225,7 @@ class WebsocketManager: WebSocketDelegate {
                         print("got a message")
       
                 }
+                
                 
                 if let messagesMessgae = try? decoder.decode(MessagesMessage.self, from: jsonData){
                     for message in messagesMessgae.message.messages {
