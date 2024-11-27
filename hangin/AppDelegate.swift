@@ -9,11 +9,18 @@ import Foundation
 import UIKit
 import KeychainSwift
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    var router: Router?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         if KeychainSwift().getBool("NotificationsAllowed") == true {
             UIApplication.shared.registerForRemoteNotifications()
         }
+        UNUserNotificationCenter.current().delegate = self
+        if KeychainSwift().get("accessToken") != nil {
+            WebsocketManager.shared.startConnection()
+        }
+            
         return true
     }
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -21,7 +28,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         sendToken(token: tokenString)
         print(tokenString)
     }
-    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        guard let chat = userInfo["chat"] as? String else {
+            print(userInfo)
+            completionHandler()
+            return
+        }
+        print(chat)
+        guard let chatId = Int(chat) else {
+            completionHandler()
+            return
+        }
+        router?.path.append("messageBox")
+        WebsocketManager.shared.subToChat(chat: Chat(id: chatId, name: "", users: [])) // there can be errors here -- ie if chat does not exist
+     
+        completionHandler()
+    }
     func sendToken(token tokenString:String){
         let url = URL(string: "\(Bundle.main.object(forInfoDictionaryKey: "BASE_URL") ?? "")/user/registerIOSDevice")!
         

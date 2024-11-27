@@ -11,12 +11,12 @@ import KeychainSwift
 
 struct MainScreen: View {
     
-    @State var chatScreenPresented = false
     @State var enterChatName = false
     @State var chatName: String = ""
     @FocusState private var fieldFocused: Bool
     @State var webSocketManager = WebsocketManager.shared
     @State var showOnlineUsers: Bool = false
+    @Binding var path: NavigationPath
     var body: some View {
         
         ScrollView {
@@ -35,7 +35,7 @@ struct MainScreen: View {
                         }
                 }
                     if showOnlineUsers {
-                        ParticipantsView(users: webSocketManager.contactsOnline)
+                        ParticipantsView(users: webSocketManager.contactsOnline, inviteToChatOnTap: true)
                             .padding(.top, 5)
                     }
                 }.animation(.bouncy, value: showOnlineUsers)
@@ -57,7 +57,8 @@ struct MainScreen: View {
                             .onSubmit {
                                 webSocketManager.newChat(name: chatName)
                                 
-                                chatScreenPresented = true
+//                                chatScreenPresented = true
+                                path.append("messageBox")
                                 print(chatName)
                                 enterChatName = false
                                 chatName = ""
@@ -74,7 +75,7 @@ struct MainScreen: View {
                 
                 ForEach(webSocketManager.chats, id:\.self){ chat in
                     ChatBar(chat: chat, action: { 
-                        chatScreenPresented = true
+                        path.append("messageBox")
                         webSocketManager.currentChat = chat
                     })
                     
@@ -90,10 +91,10 @@ struct MainScreen: View {
             webSocketManager.startConnection()
         }
         .toolbar(.hidden)
-        
-        .navigationDestination(isPresented: $chatScreenPresented, destination:{
-            MessageBoxView()
-        })
+//        
+//        .navigationDestination(isPresented: $chatScreenPresented, destination:{
+//            MessageBoxView()
+//        })
         
         .ignoresSafeArea(edges: .all)
         
@@ -113,5 +114,5 @@ struct MainScreen: View {
     }
 
 #Preview {
-    MainScreen()
+    MainScreen(path: .constant(NavigationPath()))
 }

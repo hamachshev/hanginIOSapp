@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		9204E5A12CE9695600034EC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204E5A02CE9695600034EC1 /* AppDelegate.swift */; };
 		9204E5A42CE96D1700034EC1 /* RequestNotifictationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204E5A32CE96D1700034EC1 /* RequestNotifictationView.swift */; };
+		9204E5A62CE984B400034EC1 /* CircleSmallProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204E5A52CE984B400034EC1 /* CircleSmallProfileImageView.swift */; };
+		9204E5A82CE9874F00034EC1 /* ParticipantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204E5A72CE9874F00034EC1 /* ParticipantView.swift */; };
+		9204E5AC2CE9A52400034EC1 /* ContactsFriendsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204E5AB2CE9A52400034EC1 /* ContactsFriendsResponse.swift */; };
+		9204E5AE2CEACF6100034EC1 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204E5AD2CEACF6100034EC1 /* Router.swift */; };
+		9204E5B02CEADF6300034EC1 /* UpdateChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9204E5AF2CEADF6300034EC1 /* UpdateChatMessage.swift */; };
 		9212CE992CD738FF0023F966 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212CE982CD738FF0023F966 /* Messages.swift */; };
 		9212CE9B2CD7B5BD0023F966 /* UnauthorizedMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9212CE9A2CD7B5BD0023F966 /* UnauthorizedMessage.swift */; };
 		92134C372CD175A100BACF2A /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92134C362CD175A100BACF2A /* ChatMessage.swift */; };
@@ -44,6 +49,8 @@
 		928F426A2CE7C79900767450 /* ContactOnlineMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928F42692CE7C79900767450 /* ContactOnlineMessage.swift */; };
 		928F426C2CE7C83600767450 /* ContactOfflineMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928F426B2CE7C83600767450 /* ContactOfflineMessage.swift */; };
 		928F426E2CE7CA6B00767450 /* ContactsOnlineMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928F426D2CE7CA6B00767450 /* ContactsOnlineMessage.swift */; };
+		92C70A752CEEB615000397B2 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 92C70A742CEEB615000397B2 /* ActivityIndicatorView */; };
+		92C70A772CEEBCB3000397B2 /* LoadingActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C70A762CEEBCB3000397B2 /* LoadingActor.swift */; };
 		92EA06642C9BAA800002E93E /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EA06632C9BAA800002E93E /* OnboardingView.swift */; };
 		92EA06662C9D2A640002E93E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EA06652C9D2A640002E93E /* User.swift */; };
 		92EA06682C9DAFB10002E93E /* ConfirmCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EA06672C9DAFB10002E93E /* ConfirmCode.swift */; };
@@ -55,6 +62,11 @@
 		9204E5A02CE9695600034EC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9204E5A22CE96B2700034EC1 /* hangin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hangin.entitlements; sourceTree = "<group>"; };
 		9204E5A32CE96D1700034EC1 /* RequestNotifictationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestNotifictationView.swift; sourceTree = "<group>"; };
+		9204E5A52CE984B400034EC1 /* CircleSmallProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleSmallProfileImageView.swift; sourceTree = "<group>"; };
+		9204E5A72CE9874F00034EC1 /* ParticipantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantView.swift; sourceTree = "<group>"; };
+		9204E5AB2CE9A52400034EC1 /* ContactsFriendsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsFriendsResponse.swift; sourceTree = "<group>"; };
+		9204E5AD2CEACF6100034EC1 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		9204E5AF2CEADF6300034EC1 /* UpdateChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChatMessage.swift; sourceTree = "<group>"; };
 		9212CE982CD738FF0023F966 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		9212CE9A2CD7B5BD0023F966 /* UnauthorizedMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnauthorizedMessage.swift; sourceTree = "<group>"; };
 		92134C362CD175A100BACF2A /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
@@ -92,6 +104,7 @@
 		928F42692CE7C79900767450 /* ContactOnlineMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactOnlineMessage.swift; sourceTree = "<group>"; };
 		928F426B2CE7C83600767450 /* ContactOfflineMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactOfflineMessage.swift; sourceTree = "<group>"; };
 		928F426D2CE7CA6B00767450 /* ContactsOnlineMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsOnlineMessage.swift; sourceTree = "<group>"; };
+		92C70A762CEEBCB3000397B2 /* LoadingActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingActor.swift; sourceTree = "<group>"; };
 		92EA06632C9BAA800002E93E /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		92EA06652C9D2A640002E93E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		92EA06672C9DAFB10002E93E /* ConfirmCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmCode.swift; sourceTree = "<group>"; };
@@ -104,6 +117,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92EA066F2C9DFAB40002E93E /* KeychainSwift in Frameworks */,
+				92C70A752CEEB615000397B2 /* ActivityIndicatorView in Frameworks */,
 				922A4F872CD04AF6001BA4E9 /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +132,7 @@
 				922A4F8A2CD1228B001BA4E9 /* Chat.swift */,
 				922A4F8C2CD122C6001BA4E9 /* Message.swift */,
 				926337702CE04D1C00E1E4AB /* Friend.swift */,
+				9204E5AB2CE9A52400034EC1 /* ContactsFriendsResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -152,6 +167,7 @@
 				928F42692CE7C79900767450 /* ContactOnlineMessage.swift */,
 				928F426B2CE7C83600767450 /* ContactOfflineMessage.swift */,
 				928F426D2CE7CA6B00767450 /* ContactsOnlineMessage.swift */,
+				9204E5AF2CEADF6300034EC1 /* UpdateChatMessage.swift */,
 			);
 			path = MessageTypes;
 			sourceTree = "<group>";
@@ -173,6 +189,8 @@
 				928F42652CE63AE600767450 /* ChatBar.swift */,
 				928F42672CE67ECC00767450 /* ParticipantsView.swift */,
 				9204E5A32CE96D1700034EC1 /* RequestNotifictationView.swift */,
+				9204E5A52CE984B400034EC1 /* CircleSmallProfileImageView.swift */,
+				9204E5A72CE9874F00034EC1 /* ParticipantView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,6 +231,8 @@
 				926337682CDD8B7200E1E4AB /* NetworkManager.swift */,
 				9263376E2CDDAF6D00E1E4AB /* ContactPicker.swift */,
 				9204E5A02CE9695600034EC1 /* AppDelegate.swift */,
+				9204E5AD2CEACF6100034EC1 /* Router.swift */,
+				92C70A762CEEBCB3000397B2 /* LoadingActor.swift */,
 			);
 			path = hangin;
 			sourceTree = "<group>";
@@ -272,6 +292,7 @@
 			packageReferences = (
 				92EA066D2C9DFAB40002E93E /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				922A4F852CD04AF6001BA4E9 /* XCRemoteSwiftPackageReference "Starscream" */,
+				92C70A732CEEB615000397B2 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 			);
 			productRefGroup = 9250274A2C93EF3A00D3C727 /* Products */;
 			projectDirPath = "";
@@ -308,11 +329,14 @@
 				928F426C2CE7C83600767450 /* ContactOfflineMessage.swift in Sources */,
 				928F426A2CE7C79900767450 /* ContactOnlineMessage.swift in Sources */,
 				922A4F8B2CD1228B001BA4E9 /* Chat.swift in Sources */,
+				9204E5A62CE984B400034EC1 /* CircleSmallProfileImageView.swift in Sources */,
+				9204E5AE2CEACF6100034EC1 /* Router.swift in Sources */,
 				922A4F9F2CD12F5F001BA4E9 /* NewChatsMessage.swift in Sources */,
 				92EA06682C9DAFB10002E93E /* ConfirmCode.swift in Sources */,
 				922A4F9B2CD12EF9001BA4E9 /* DeleteChatMessage.swift in Sources */,
 				92EA066A2C9DB0150002E93E /* AddNamesView.swift in Sources */,
 				9204E5A12CE9695600034EC1 /* AppDelegate.swift in Sources */,
+				9204E5B02CEADF6300034EC1 /* UpdateChatMessage.swift in Sources */,
 				9204E5A42CE96D1700034EC1 /* RequestNotifictationView.swift in Sources */,
 				922A4FA22CD16601001BA4E9 /* MessageBoxView.swift in Sources */,
 				928F425E2CE2C2E900767450 /* CirclesViews.swift in Sources */,
@@ -328,14 +352,17 @@
 				9224E0012C94C4730083F972 /* ChatView.swift in Sources */,
 				9263376D2CDDA64F00E1E4AB /* ContactsImport.swift in Sources */,
 				92EA06662C9D2A640002E93E /* User.swift in Sources */,
+				92C70A772CEEBCB3000397B2 /* LoadingActor.swift in Sources */,
 				92134C372CD175A100BACF2A /* ChatMessage.swift in Sources */,
 				9212CE992CD738FF0023F966 /* Messages.swift in Sources */,
 				928F42682CE67ECC00767450 /* ParticipantsView.swift in Sources */,
 				922A4F992CD12E7D001BA4E9 /* OwnChatMessage.swift in Sources */,
+				9204E5A82CE9874F00034EC1 /* ParticipantView.swift in Sources */,
 				928F42642CE56ABD00767450 /* Circles2.swift in Sources */,
 				922A4F9D2CD12F2E001BA4E9 /* NewChatMessage.swift in Sources */,
 				928F42662CE63AE600767450 /* ChatBar.swift in Sources */,
 				92134C3B2CD177CB00BACF2A /* RightMessage.swift in Sources */,
+				9204E5AC2CE9A52400034EC1 /* ContactsFriendsResponse.swift in Sources */,
 				9250274D2C93EF3A00D3C727 /* hanginApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -659,6 +686,14 @@
 				minimumVersion = 4.0.8;
 			};
 		};
+		92C70A732CEEB615000397B2 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ActivityIndicatorView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 		92EA066D2C9DFAB40002E93E /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
@@ -674,6 +709,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 922A4F852CD04AF6001BA4E9 /* XCRemoteSwiftPackageReference "Starscream" */;
 			productName = Starscream;
+		};
+		92C70A742CEEB615000397B2 /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 92C70A732CEEB615000397B2 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
 		};
 		92EA066E2C9DFAB40002E93E /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;

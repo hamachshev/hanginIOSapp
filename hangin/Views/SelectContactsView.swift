@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Contacts
+import KeychainSwift
 
 struct SelectContactsView: View {
     @State var mode:EditMode = .active
@@ -30,7 +31,7 @@ struct SelectContactsView: View {
                 var url: URL {
                     var components = URLComponents(string: "\(Bundle.main.object(forInfoDictionaryKey: "BASE_URL") ?? "")/friends")! //handle all the error cases
                     let queryItems: [URLQueryItem] = [
-                        .init(name: "access_token", value: "hIo9suYXaSyhf37gowdOeq8Q7LaUHocSo0luAsWEq5Q") //change this to Keychain Later
+                        .init(name: "access_token", value: KeychainSwift().get("accessToken") ??  "") //change this to Keychain Later
                     ]
                     components.queryItems = queryItems
                     return components.url!
@@ -95,7 +96,7 @@ struct SelectContactsView: View {
             }
         }
         .navigationDestination(isPresented: $showContacts) {
-            MainScreen()
+//            MainScreen() fix later
         }
     }
     

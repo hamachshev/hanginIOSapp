@@ -15,6 +15,7 @@ class WebsocketManager: WebSocketDelegate {
     var chats: [Chat] = []
     var chatMessages: [ChatMessageMessage] = []
     var contactsOnline: [ChatUser] = []
+    var subbedToChatsChanel = false
     private var started = false
     
     var currentChat: Chat? {
@@ -58,6 +59,19 @@ class WebsocketManager: WebSocketDelegate {
                       """)
     }
     
+    func goToBackground() {
+        print("going to the background")
+        socket?.write(string: """
+                      {
+                        "command":"message",
+                        "identifier":"{\\"channel\\":\\"ChatsChannel\\"}",
+                        "data":"{\\"action\\":\\"go_to_background\\"}"
+                      }
+                      """)
+        started = false
+    
+    }
+    
     func subToChat(chat:Chat){
         print("subbing to chat")
         
@@ -93,17 +107,23 @@ class WebsocketManager: WebSocketDelegate {
                 """)
     }
     
+    func subToChatsChannel(){
+        print("hi")
+        socket?.write(string: """
+                      {
+                        "command":"subscribe",
+                        "identifier":"{\\"channel\\":\\"ChatsChannel\\"}"
+                      }
+                      """)
+        subbedToChatsChanel = true
+    }
+    
     func didReceive(event: WebSocketEvent, client: any WebSocketClient) {
             
             switch event {
             case .connected(_):
                 print("connected to websocket")
-                socket?.write(string: """
-                              {
-                                "command":"subscribe",
-                                "identifier":"{\\"channel\\":\\"ChatsChannel\\"}"
-                              }
-                              """)
+                subToChatsChannel()
             case .disconnected(_, _): break
                 
             case .text(let string):
@@ -195,6 +215,18 @@ class WebsocketManager: WebSocketDelegate {
                         print("deleting chat")
       
                 }
+                if let message = try? decoder.decode(UpdateChatMessage.self, from: jsonData){
+                    
+                    chats = chats.map { chat in
+                        if chat.id == message.message.updateChat.id {
+                            return message.message.updateChat
+                        } else {
+                            return chat
+                        }
+                    }
+                        print("updating chat")
+      
+                }
                 
                 if let message = try? decoder.decode(ContactOnlineMessage.self, from: jsonData){
                     
@@ -205,7 +237,7 @@ class WebsocketManager: WebSocketDelegate {
                 
                 if let message = try? decoder.decode(ContactsOnlineMessage.self, from: jsonData){
                     
-                        contactsOnline.append(contentsOf: message.message.contactsOnline)
+                        contactsOnline = message.message.contactsOnline
                         print("new online users!!")
       
                 }

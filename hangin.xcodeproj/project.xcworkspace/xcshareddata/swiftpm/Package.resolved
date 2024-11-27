@@ -1,6 +1,15 @@
 {
-  "originHash" : "5eb9be6b624baf79a5b31a3c9dfca0815f04ac8633c3e52be733d3efb4f43126",
+  "originHash" : "784d528cd9798336930b5bbf6ca38c60a5a1e6f4a707a701654ffd853cd5e50b",
   "pins" : [
+    {
+      "identity" : "activityindicatorview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/exyte/ActivityIndicatorView",
+      "state" : {
+        "revision" : "9970fd0bb7a05dad0b6566ae1f56937716686b24",
+        "version" : "1.1.1"
+      }
+    },
     {
       "identity" : "keychain-swift",
       "kind" : "remoteSourceControl",

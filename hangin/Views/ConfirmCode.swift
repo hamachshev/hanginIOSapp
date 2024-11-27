@@ -86,7 +86,8 @@ struct ConfirmCode: View {
                 Spacer()
             }
             .navigationDestination(isPresented: $showChatsScreen) {
-                MainScreen()
+//                MainScreen() fix later
+                
             }
         }
         
